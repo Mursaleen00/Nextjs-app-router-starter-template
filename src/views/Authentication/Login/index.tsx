@@ -5,9 +5,9 @@ import { FC, Fragment } from 'react';
 
 // React Query Imports
 import { UserLoginMutationHook } from '@/services/react-query-client/auth/user-login';
+import Button from '@/components/buttons/button';
 
 // Custom Component Imports
-import { Button } from '@/components/ui/button';
 
 interface ISignInViewProps {}
 
@@ -27,7 +27,10 @@ const SignInView: FC<ISignInViewProps> = () => {
   };
   return (
     <Fragment>
-      <Button onClick={handleLogin}>Login</Button>
+      <Button
+        onClick={handleLogin}
+        text='Login'
+      />
     </Fragment>
   );
 };

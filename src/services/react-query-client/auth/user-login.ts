@@ -66,8 +66,6 @@ export const UserLoginMutationHook = (): UseMutationResult<
     },
     // Callback fired when the mutation encounters an error
     onError: (error: CustomAxiosErrorType) => {
-      console.error({ error });
-
       toast.error(error?.response?.data?.message ?? 'Login Failed');
 
       return {

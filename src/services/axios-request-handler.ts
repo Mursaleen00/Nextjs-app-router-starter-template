@@ -1,5 +1,5 @@
 // Axios Imports
-import Axios from 'axios';
+import axiosInstance from '@/config/axios.config';
 
 /**
  * Performs a GET request.
@@ -9,23 +9,16 @@ import Axios from 'axios';
  * @returns {Promise<unknown>} - A Promise resolving to the response data.
  * @throws Will throw an error if the GET request fails.
  */
-export const GET = async (
-  endPoint: string,
-  header: string,
-): Promise<unknown> => {
+export const GET = async (endPoint: string): Promise<unknown> => {
   return new Promise((resolve, reject) => {
-    Axios.get(endPoint, {
-      headers: {
-        Authorization: `Bearer ${header}`,
-      },
-    })
+    axiosInstance
+      .get(endPoint)
       .then(response => {
         if (response) {
           resolve(response.data);
         }
       })
       .catch((error: Error) => {
-        console.error(error);
         reject(error);
       });
   });
@@ -43,21 +36,16 @@ export const GET = async (
 export const POST = async (
   endPoint: string,
   data: Array<unknown> | Record<string, never> | unknown = {},
-  token = '',
 ): Promise<unknown> =>
   new Promise((resolve, reject) => {
-    Axios.post(endPoint, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    axiosInstance
+      .post(endPoint, data)
       .then(response => {
         if (response) {
           resolve(response.data);
         }
       })
       .catch((error: Error) => {
-        console.error('response error', error);
         reject(error);
       });
   });
@@ -74,21 +62,16 @@ export const POST = async (
 export const PUT = async (
   endPoint: string,
   data: Array<unknown> | Record<string, never> | unknown = {},
-  token = '',
 ): Promise<unknown> =>
   new Promise((resolve, reject) => {
-    Axios.put(endPoint, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    axiosInstance
+      .put(endPoint, data)
       .then(response => {
         if (response) {
           resolve(response.data);
         }
       })
       .catch((error: Error) => {
-        console.error({ error });
         reject(error);
       });
   });
@@ -104,16 +87,13 @@ export const PUT = async (
  */
 export const DELETE = async (
   endPoint: string,
-  header: string,
   data?: unknown,
 ): Promise<unknown> => {
   return new Promise((resolve, reject) => {
-    Axios.delete(endPoint, {
-      data,
-      headers: {
-        Authorization: `Bearer ${header}`,
-      },
-    })
+    axiosInstance
+      .delete(endPoint, {
+        data,
+      })
       .then(res => {
         if (res) {
           resolve(res.data);
